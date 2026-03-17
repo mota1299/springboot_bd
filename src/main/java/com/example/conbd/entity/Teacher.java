@@ -1,14 +1,14 @@
 package com.example.conbd.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "subject_catalog")
-public class Subject {
+@Table(name = "teacher")
+public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,22 +17,19 @@ public class Subject {
     @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(name = "hours", nullable = false)
-    private Integer hours;
-
-    @Column(name = "creator_user", nullable = false, length = 100)
-    private String creatorUser;
+    @Column(name = "email", nullable = false, length = 150)
+    private String email;
 
     @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
 
-    @Column(name = "modification_user", length = 100)
-    private String modificationUser;
+    @Column(name = "creation_user", length = 150)
+    private String creationUser;
 
     @Column(name = "modification_date")
     private LocalDateTime modificationDate;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    @Column(name = "modification_user", length = 150)
+    private String modificationUser;
+
 }
