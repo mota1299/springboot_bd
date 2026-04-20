@@ -11,5 +11,8 @@ public interface IMateriaService {
 
     MateriaResponse guardarMateria(MateriaRequest request);
 
+    MateriaResponse actualizarMateria(Integer id, MateriaRequest request);
+
+    void eliminarMateria(Integer id);
 
 }

@@ -57,6 +57,38 @@ public class MateriaServiceImp implements IMateriaService {
         return response;
     }
 
+    @Override
+    public MateriaResponse actualizarMateria(Integer id, MateriaRequest request) {
+        Subject subject = iSubjectRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Subject no encontrado"));
+
+        Teacher teacher = iTeacherRepository
+                .findById(request.getIdProfesor())
+                .orElseThrow(() -> new RuntimeException("Teacher no encontrado"));
+
+        subject.setName(request.getNombreMateria());
+        subject.setHours(request.getHoras());
+        subject.setTeacher(teacher);
+        subject.setModificationUser("system");
+        subject.setModificationDate(LocalDateTime.now());
+
+        Subject subjectSaved = iSubjectRepository.save(subject);
+
+        MateriaResponse response = new MateriaResponse();
+        response.setNombreMateria(subjectSaved.getName());
+        response.setHoras(subjectSaved.getHours());
+        return response;
+    }
+
+    @Override
+    public void eliminarMateria(Integer id) {
+        Subject subject = iSubjectRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Subject no encontrado"));
+        iSubjectRepository.delete(subject);
+    }
+
 
 
 
