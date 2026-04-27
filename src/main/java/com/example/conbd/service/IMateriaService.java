@@ -13,6 +13,8 @@ public interface IMateriaService {
 
     MateriaResponse actualizarMateria(Integer id, MateriaRequest request);
 
+    MateriaResponse actualizarParcialMateria(Integer id, MateriaRequest request);
+
     void eliminarMateria(Integer id);
 
 }

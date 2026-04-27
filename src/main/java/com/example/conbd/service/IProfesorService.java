@@ -9,6 +9,8 @@ public interface IProfesorService {
 
     ProfesorResponse actualizarProfesor(Integer id, ProfesorRequest request);
 
+    ProfesorResponse actualizarParcialProfesor(Integer id, ProfesorRequest request);
+
     void eliminarProfesor(Integer id);
 
 }

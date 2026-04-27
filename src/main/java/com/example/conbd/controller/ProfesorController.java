@@ -6,6 +6,7 @@ import com.example.conbd.service.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,12 @@ public class ProfesorController {
     @PutMapping
     public ResponseEntity<ProfesorResponse> updateTeacher(@RequestParam("id") Integer id, @RequestBody ProfesorRequest request) {
         ProfesorResponse teacher = iProfesorService.actualizarProfesor(id, request);
+        return ResponseEntity.ok(teacher);
+    }
+
+    @PatchMapping
+    public ResponseEntity<ProfesorResponse> patchTeacher(@RequestParam("id") Integer id, @RequestBody ProfesorRequest request) {
+        ProfesorResponse teacher = iProfesorService.actualizarParcialProfesor(id, request);
         return ResponseEntity.ok(teacher);
     }
 

@@ -55,6 +55,32 @@ public class ProfesorServiceImp implements IProfesorService {
     }
 
     @Override
+    public ProfesorResponse actualizarParcialProfesor(Integer id, ProfesorRequest request) {
+        Teacher teacher = iTeacherRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Teacher no encontrado"));
+
+        if (request.getNombreProfesor() != null) {
+            teacher.setName(request.getNombreProfesor());
+        }
+
+        if (request.getEmail() != null) {
+            teacher.setEmail(request.getEmail());
+        }
+
+        teacher.setModificationUser("system");
+        teacher.setModificationDate(LocalDateTime.now());
+
+        Teacher teacherSaved = iTeacherRepository.save(teacher);
+
+        ProfesorResponse response = new ProfesorResponse();
+        response.setNombreProfesor(teacherSaved.getName());
+        response.setEmail(teacherSaved.getEmail());
+        response.setMaterias(new ArrayList<>());
+        return response;
+    }
+
+    @Override
     public void eliminarProfesor(Integer id) {
         Teacher teacher = iTeacherRepository
                 .findById(id)
